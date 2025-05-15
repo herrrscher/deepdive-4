@@ -1,17 +1,14 @@
         body {
             text-align: center; font-family: Arial, sans-serif;
+            background-color: #F2EFE7;
+            color: black;
         }
 
         span {
-            border: 3px solid black;
+            border: 3px solid #2d2c32;
             padding: 5px;
             border-radius: 10px;
-            background-color: gold;
-        }
-
-        #slot-machine {
-            font-size: 30px; margin: 20px; display: inline-block;
-            background-color:  #FFBF00; padding: 10px; border-radius: 10px;
+            background-color: #D4C9BE;
         }
 
         .slot {
@@ -24,7 +21,9 @@
 
         button {
             font-size: 20px; padding: 10px; margin-top: 20px;
-
+            background-color: #48A6A7;
+            border: 1px solid #27445D;
+            border-radius: 10px;
         }
 
         @keyframes spin {
@@ -36,10 +35,58 @@
             animation: spin 0.5s ease-in-out;
         }
 
-        #header {
-            display: flex;
-            background-color: pink;
-            align-items: center;
-            padding: 10px 20px;
-            justify-content: space-evenly;
-        }
+#slot-machine {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    margin: 20px;
+    background-color: #48A6A7;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #006A71;
+    padding: 40px 30px;
+    border-radius: 18px;
+    box-shadow: 0 6px 32px 0 rgba(0,0,0,0.25);
+    margin: 40px auto;
+    max-width: 420px;
+}
+
+#header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #27445D;
+    color: #9ACBD0;
+    padding: 6px 20px;
+    min-height: 0;
+    position: relative;
+}
+
+.header-titles {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    flex: 0 1 auto;
+}
+
+#header .sign {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-left: 0;
+}
+
+a {
+    text-decoration: none;
+    color: white
+}
