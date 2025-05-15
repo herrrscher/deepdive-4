@@ -1,0 +1,24 @@
+.coin {
+  width: 150px;
+  height: 150px;
+  margin: 0 auto 20px;
+  perspective: 1000px;
+}
+
+.coin img {
+  width: 100%;
+  height: auto;
+  border-radius: 50%;
+  display: block;
+  backface-visibility: hidden;
+  transition: transform 1s ease-in-out;
+}
+
+.flip {
+  animation: flip 3s forwards;
+}
+
+@keyframes flip {
+  25%  { transform: rotateY(1800deg); }
+
+}
