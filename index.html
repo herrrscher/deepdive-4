@@ -6,10 +6,14 @@
 </head>
 <body>
     <div id="header">
-        <h2>blackjack</h2>
-    <h1>Slot Machine</h1>
-    <h2>coin flip</h2>
+        <div class="header-titles">
+        <a href="blackjack.html"><h2>blackjack</h2></a>
+        <a href="index.html"><h1>Slot Machine</h1></a>
+        <a href="coinflip.html"><h2>coin flip</h2></a>
     </div>
+    <a href="signup.html"><button class="sign">sign in</button></a>
+</div>
+   <div class="container">
     <div id="slot-machine">
         <span class="slot" id="slot1">🍒</span>
         <span class="slot" id="slot2">🍋</span>
@@ -17,13 +21,16 @@
         <span class="slot" id="slot4">⭐</span>
         <span class="slot" id="slot5">💎</span>
     </div>
+    <div class="button-grid">
+        <button onclick="spinSlot()">Spin (Choose Amount)</button>
+        <button onclick="fastSpin()">Fast Spin ($100)</button>
+        <button onclick="borrowMoney()">Borrow from Loan Shark</button>
+        <button onclick="repayDebt()">Repay Debt</button>
+    </div>
     <p id="balance">Balance: $100</p>
     <p id="debt">Debt: $0</p>
-    <button onclick="spinSlot()">Spin (Choose Amount)</button>
-    <button onclick="fastSpin()">Fast Spin ($100)</button>
-    <button onclick="borrowMoney()">Borrow from Loan Shark</button>
-    <button onclick="repayDebt()">Repay Debt</button>
     <ul id="historyLog"></ul>
+</div>
 <script src="script.js"></script>
 </body>
 </html>
