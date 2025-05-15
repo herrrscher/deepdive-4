@@ -155,3 +155,4 @@ function repayDebt() {
 }
 
 updateDisplay();
+
