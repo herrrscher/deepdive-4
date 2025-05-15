@@ -26,6 +26,10 @@
             border-radius: 10px;
         }
 
+        button:hover {
+            cursor: pointer;
+        }
+
         @keyframes spin {
             0% { transform: rotateX(0deg); }
             100% { transform: rotateX(360deg); }
@@ -89,4 +93,18 @@
 a {
     text-decoration: none;
     color: white
+}
+
+.button-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 24px 0;
+    width: 100%;
+    max-width: 420px;
+}
+
+.button-grid button {
+    width: 100%;
+    margin-top: 0;
 }
