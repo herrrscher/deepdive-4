@@ -8,12 +8,36 @@
   <link rel="stylesheet" href="coin.css">
 </head>
 <body>
+  <div id="header">
+    <div class="header-titles">
+      <a href="blackjack.html"><h2>blackjack</h2></a>
+      <a href="index.html"><h1>Slot Machine</h1></a>
+      <a href="coinflip.html"><h2>coin flip</h2></a>
+    </div>
+    <a href="signup.html"><button class="sign">sign in</button></a>
+  </div>
+
   <div class="container">
     <div class="coin" id="coin">
       <img src="images/head.png" alt="Coin" id="coin-img">
     </div>
-    <button id="flip-btn">Flip Coin</button>
   </div>
+
+  <div class="wallet">
+    <p id="balance">Balance: $1000</p>
+    <p id="debt">Debt: $0</p>
+
+    <div class="choice-buttons">
+      <button onclick="selectChoice('heads')" id="btn-heads">Heads</button>
+      <button onclick="selectChoice('tails')" id="btn-tails">Tails</button>
+    </div>
+
+    <input type="number" id="amount" placeholder="Bet $" min="1">
+    <br>
+    <button onclick="flipCoin()">Flip Coin</button>
+  </div>
+
+  <ul id="historyLog"></ul>
 
   <script src="coinflip.js"></script>
 </body>
