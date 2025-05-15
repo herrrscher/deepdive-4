@@ -111,21 +111,22 @@ function spinReels(bet) {
 }
 
 function borrowMoney() {
-    let amount = parseInt(prompt("Enter amount to borrow (Max total debt: $1000):"));
+    let amount = parseInt(prompt("Enter amount to borrow (Max total debt: $5000):"));
     if (isNaN(amount) || amount <= 0) {
         alert("Invalid amount!");
         return;
     }
-    if (debt + amount > 1000) {
-        alert("Borrowing denied! You can't owe more than $1000.");
+    if (debt + amount > 5000) {
+        alert("Borrowing denied! You can't owe more than $5000.");
         return;
     }
     balance += amount;
-    debt += amount;
+    debt += amount * 1.10;
     overdue = false;
     days = 0;
     updateDisplay();
 }
+
 
 
 function checkDebtGrowth() {
