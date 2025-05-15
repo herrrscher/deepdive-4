@@ -1,11 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Slot Machine</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>NIGGERS</h1>
+    <h1>Slot Machine</h1>
+    <div id="slot-machine">
+        <span class="slot" id="slot1">🍒</span>
+        <span class="slot" id="slot2">🍋</span>
+        <span class="slot" id="slot3">🍉</span>
+    </div>
+    <p id="balance">Balance: $100</p>
+    <p id="debt">Debt: $0</p>
+    <button onclick="spinSlot()">Spin (Choose Amount)</button>
+    <button onclick="fastSpin()">Fast Spin ($100)</button>
+    <button onclick="sellOrgan()">Sell Your Organ</button>
+    <button onclick="rebuyOrgan()">Rebuy Organ</button>
+    <button onclick="borrowMoney()">Borrow from Loan Shark</button>
+    <button onclick="repayDebt()">Repay Debt</button>
+    <h3>Organ Prices:</h3>
+    <ul id="organ-list"></ul>
+<script src="script.js"></script>
 </body>
 </html>
