@@ -149,3 +149,20 @@ function repayDebt() {
 }
 
 updateDisplay();
+
+document.getElementById('testLogin').addEventListener('click', async () => {
+    const response = await fetch('login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            email: 'test@example.com',
+            password: '123test123'
+        })
+    })
+    console.log(response);
+    const data = await response.json()
+    console.log(data);
+    
+})
