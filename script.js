@@ -1,127 +1,151 @@
- let balance = 1000;
-        let debt = 0;
-        let days = 0;
-        let overdue = false;
-        let lossCount = 0;
-        const symbols = ['🍒', '🍋', '🍉', '🍊', '⭐', '💎'];
-        let organs = {
-            "Kidney": { price: 500, sold: false },
-            "Liver": { price: 1000, sold: false },
-            "Heart": { price: 5000, sold: false },
-            "Lung": { price: 3000, sold: false },
-            "Eye": { price: 800, sold: false },
-            "Pancreas": { price: 2500, sold: false }
-        };
+let balance = 1000;
+let debt = 0;
+let days = 0;
+let overdue = false;
+let lossCount = 0;
+const symbols = ['🍒', '🍋', '🍉', '🍊', '⭐', '💎', '💀', '😭'];
+const historyLog = [];
 
-        function updateDisplay() {
-            document.getElementById("balance").innerText = `Balance: $${balance}`;
-            document.getElementById("debt").innerText = `Debt: $${debt}`;
+const winSound = new Audio('win.mp3');
+const loseSound = new Audio('lose.mp3');
+const gameOverSound = new Audio('gameover.mp3');
+
+function updateDisplay() {
+    document.getElementById("balance").innerText = `Balance: $${balance}`;
+    document.getElementById("debt").innerText = `Debt: $${debt}`;
+    updateHistory();
+}
+
+function updateHistory() {
+    const log = document.getElementById("historyLog");
+    log.innerHTML = historyLog.slice(-10).reverse().map(entry => `<li>${entry}</li>`).join('');
+}
+
+function spinSlot() {
+    let bet = parseInt(prompt("Enter your bet amount:"));
+    if (isNaN(bet) || bet <= 0 || bet > balance) {
+        alert("Invalid bet amount!");
+        return;
+    }
+    balance -= bet;
+    spinReels(bet);
+    days++;
+    checkDebtGrowth();
+    updateDisplay();
+}
+
+function fastSpin() {
+    const bet = 100;
+    if (balance < bet) {
+        alert("Not enough money for fast spin!");
+        return;
+    }
+    balance -= bet;
+    spinReels(bet);
+    days++;
+    checkDebtGrowth();
+    updateDisplay();
+}
+
+function spinReels(bet) {
+    const slots = [
+        document.getElementById("slot1"),
+        document.getElementById("slot2"),
+        document.getElementById("slot3"),
+        document.getElementById("slot4"),
+        document.getElementById("slot5")
+    ];
+
+    slots.forEach(slot => slot.classList.add("spinning"));
+
+    setTimeout(() => {
+        slots.forEach(slot => slot.classList.remove("spinning"));
+
+        const results = slots.map(() => symbols[Math.floor(Math.random() * symbols.length)]);
+        results.forEach((sym, i) => slots[i].innerText = sym);
+
+        const unique = new Set(results);
+        const skulls = results.filter(s => s === '💀').length;
+
+        let winnings = 0;
+        let resultMsg = "";
+
+        if (skulls >= 3) {
+            gameOverSound.play();
+            alert("💀💀💀 Too many skulls! Game Over.");
+            balance = 0;
+            debt += 500;
+            lossCount = 0;
+            resultMsg = "Game Over 💀💀💀";
+        } else if (skulls > 0) {
+            balance -= skulls * 50;
+            resultMsg = `Penalty: ${skulls}💀 (-$${skulls * 50})`;
         }
 
-        function spinSlot() {
-            let bet = parseInt(prompt("Enter your bet amount:"));
-            if (isNaN(bet) || bet <= 0 || bet > balance) {
-                alert("Invalid bet amount!");
-                return;
-            }
-            balance -= bet;
-            spinReels(bet);
-            days++;
-            checkDebtGrowth();
-            updateDisplay();
+        if (unique.size === 1) {
+            winnings = bet * 20;
+            balance += winnings;
+            resultMsg = `JACKPOT! 🎉 +$${winnings}`;
+            winSound.play();
+            lossCount = 0;
+        } else if (unique.size <= 3 && skulls < 3) {
+            winnings = bet * [2, 4, 6, 10][Math.floor(Math.random() * 4)];
+            balance += winnings;
+            resultMsg = `Win! +$${winnings}`;
+            winSound.play();
+            lossCount = 0;
+        } else if (skulls < 3 && winnings === 0) {
+            resultMsg = "You lost.";
+            loseSound.play();
+            lossCount++;
         }
 
-        function fastSpin() {
-            if (balance < 100) {
-                alert("Not enough money for fast spin!");
-                return; 
-            }
-            balance -= 1000;
-            spinReels(100);
-            days++;
-            checkDebtGrowth();
-            updateDisplay();
+        if (lossCount >= 10) {
+            alert("Maybe next time...");
+            lossCount = 0;
         }
 
-        function spinReels(bet) {
-            const slot1 = document.getElementById("slot1");
-            const slot2 = document.getElementById("slot2");
-            const slot3 = document.getElementById("slot3");
-            
-            slot1.classList.add("spinning");
-            slot2.classList.add("spinning");
-            slot3.classList.add("spinning");
+        historyLog.push(`${new Date().toLocaleTimeString()} — ${resultMsg}`);
+        updateDisplay();
+    }, 500);
+}
 
-            setTimeout(() => {
-                slot1.classList.remove("spinning");
-                slot2.classList.remove("spinning");
-                slot3.classList.remove("spinning");
-                
-                const newSlot1 = symbols[Math.floor(Math.random() * symbols.length)];
-                const newSlot2 = symbols[Math.floor(Math.random() * symbols.length)];
-                const newSlot3 = symbols[Math.floor(Math.random() * symbols.length)];
-                
-                slot1.innerText = newSlot1;
-                slot2.innerText = newSlot2;
-                slot3.innerText = newSlot3;
-                
-                let winnings = 0;
-                if (newSlot1 === newSlot2 && newSlot2 === newSlot3) {
-                    winnings = bet * 10;
-                } else if (newSlot1 === newSlot2 || newSlot2 === newSlot3 || newSlot1 === newSlot3) {
-                    winnings = bet * [2, 4, 6, 8][Math.floor(Math.random() * 4)];
-                }
-                
-                if (winnings > 0) {
-                    balance += winnings;
-                    alert(`You won $${winnings}!`);
-                    lossCount = 0;
-                } else {
-                    lossCount++;
-                }
-                
-                if (lossCount >= 10) {
-                    alert("Maybe next time...");
-                    lossCount = 0;
-                }
-                updateDisplay();
-            }, 500);
-        }
+function borrowMoney() {
+    let amount = parseInt(prompt("Enter amount to borrow:"));
+    if (isNaN(amount) || amount <= 0) {
+        alert("Invalid amount!");
+        return;
+    }
+    balance += amount;
+    debt += amount;
+    overdue = false;
+    days = 0;
+    updateDisplay();
+}
 
-        function borrowMoney() {
-            let amount = parseInt(prompt("Enter amount to borrow:"));
-            if (isNaN(amount) || amount <= 0) {
-                alert("Invalid amount!");
-                return;
-            }
-            balance += amount;
-            debt += amount;
-            overdue = false;
-            days = 0;
-            updateDisplay();
+function checkDebtGrowth() {
+    if (debt > 0) {
+        if (days >= 5 && !overdue) {
+            alert("Debt is now overdue! It will start doubling.");
+            overdue = true;
+        } else if (overdue && days >= 10) {
+            debt *= 2;
+            alert(`Your debt has doubled! New debt: $${debt}`);
         }
+    }
+}
 
-        function checkDebtGrowth() {
-            if (debt > 0) {
-                if (days >= 5 && !overdue) {
-                    alert("Debt is now overdue! It will start doubling.");
-                    overdue = true;
-                } else if (overdue && days >= 10) {
-                    debt *= 2;
-                    alert(`Your debt has doubled! New debt: $${debt}`);
-                }
-            }
-        }
+function repayDebt() {
+    if (balance >= debt) {
+        balance -= debt;
+        debt = 0;
+        overdue = false;
+        days = 0;
+        alert("Debt fully repaid!");
+    } else {
+        alert("Not enough money to fully repay the debt!");
+    }
+    updateDisplay();
+}
 
-        function repayDebt() {
-            if (balance >= debt) {
-                balance -= debt;
-                debt = 0;
-                overdue = false;
-                days = 0;
-                alert("Debt fully repaid!");
-            } else {
-                alert("Not enough money to fully repay the debt!");
-            }
-            updateDisplay();
-        }
+updateDisplay();
