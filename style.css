@@ -1,12 +1,31 @@
-        body { text-align: center; font-family: Arial, sans-serif; }
+        body {
+            text-align: center; font-family: Arial, sans-serif;
+        }
 
-        #slot-machine { font-size: 30px; margin: 20px; display: inline-block; }
+        span {
+            border: 3px solid black;
+            padding: 5px;
+            border-radius: 10px;
+            background-color: gold;
+        }
 
-        .slot { display: inline-block; width: 50px; height: 50px; text-align: center; }
+        #slot-machine {
+            font-size: 30px; margin: 20px; display: inline-block;
+            background-color:  #FFBF00; padding: 10px; border-radius: 10px;
+        }
 
-        #balance, #debt { font-size: 24px; }
+        .slot {
+            display: inline-block; width: 50px; height: 50px; text-align: center;
+        }
 
-        button { font-size: 20px; padding: 10px; margin-top: 20px; }
+        #balance, #debt {
+            font-size: 24px;
+        }
+
+        button {
+            font-size: 20px; padding: 10px; margin-top: 20px;
+
+        }
 
         @keyframes spin {
             0% { transform: rotateX(0deg); }
@@ -17,10 +36,10 @@
             animation: spin 0.5s ease-in-out;
         }
 
-    #header {
-        display: flex;
-        background-color: pink;
-        align-items: center;
-        padding: 10px 20px;
-        justify-content: space-evenly;
-    }
+        #header {
+            display: flex;
+            background-color: pink;
+            align-items: center;
+            padding: 10px 20px;
+            justify-content: space-evenly;
+        }
