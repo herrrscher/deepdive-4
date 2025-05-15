@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Face Detection Frontend</title>
+  <style>
+    video {
+      transform: scaleX(-1); /* Mirror the video feed */
+    }
+  </style>
+</head>
+<body>
+  <h2>Face Detection</h2>
+  <video id="video" width="640" height="480" autoplay></video>
+  <canvas id="canvas" style="display: none;"></canvas>
+  <p id="result"></p>
+
+  <script>
+    const video = document.getElementById('video');
+    const canvas = document.getElementById('canvas');
+    const result = document.getElementById('result');
+
+    navigator.mediaDevices.getUserMedia({ video: true })
+      .then(stream => {
+        video.srcObject = stream;
+      })
+      .catch(err => console.error("Error accessing webcam:", err));
+
+    setInterval(() => {
+      const ctx = canvas.getContext('2d');
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      ctx.translate(canvas.width, 0);         // Flip horizontally
+      ctx.scale(-1, 1);                        // Mirror
+      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+      const imageData = canvas.toDataURL('image/jpeg');
+
+      fetch('http://127.0.0.1:5000/analyze', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ image: imageData })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.error) {
+          result.innerText = "Error: " + data.error;
+        } else {
+          result.innerText = `Race: ${data.race} | Age: ${data.age}`;
+        }
+      })
+      .catch(err => {
+        console.error("Request failed:", err);
+        result.innerText = "Detection failed.";
+      });
+    }, 2000);
+  </script>
+</body>
+</html>
