@@ -73,7 +73,7 @@ function spinReels(bet) {
         if (skulls >= 3) {
             gameOverSound.play();
             alert("💀💀💀 Too many skulls! Game Over.");
-            balance = 0;
+            balance -= 1000;
             debt += 500;
             lossCount = 0;
             resultMsg = "Game Over 💀💀💀";
@@ -111,9 +111,13 @@ function spinReels(bet) {
 }
 
 function borrowMoney() {
-    let amount = parseInt(prompt("Enter amount to borrow:"));
+    let amount = parseInt(prompt("Enter amount to borrow (Max total debt: $1000):"));
     if (isNaN(amount) || amount <= 0) {
         alert("Invalid amount!");
+        return;
+    }
+    if (debt + amount > 1000) {
+        alert("Borrowing denied! You can't owe more than $1000.");
         return;
     }
     balance += amount;
@@ -122,6 +126,7 @@ function borrowMoney() {
     days = 0;
     updateDisplay();
 }
+
 
 function checkDebtGrowth() {
     if (debt > 0) {
@@ -149,6 +154,7 @@ function repayDebt() {
 }
 
 updateDisplay();
+
 
 document.getElementById('testLogin').addEventListener('click', async () => {
     const response = await fetch('login', {
