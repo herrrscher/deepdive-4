@@ -15,7 +15,7 @@ function createDeck() {
     }
   }
 
-  deck.sort(() => Math.random() - 0.5); // shuffle
+  deck.sort(() => Math.random() - 0.5);
 }
 
 function cardImage(card) {
