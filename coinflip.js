@@ -17,7 +17,7 @@ function selectChoice(choice) {
 function flipCoin() {
   const betInput = document.getElementById("amount");
   const bet = parseInt(betInput.value);
-  const coinImg = document.getElementById("coin-img"); // <-- één keer declareren
+  const coinImg = document.getElementById("coin-img");
 
   if (isNaN(bet) || bet <= 0 || bet > balance) {
     alert("Voer een geldig bedrag in!");
@@ -31,21 +31,21 @@ function flipCoin() {
 
   balance -= bet;
 
-  // Flip animatie
+
   coinImg.classList.remove("flip");
-  void coinImg.offsetWidth; // force reflow
+  void coinImg.offsetWidth;
   coinImg.classList.add("flip");
 
 setTimeout(() => {
   const result = Math.random() < 0.5 ? "heads" : "tails";
 
-  // Correct pad gebruiken voor afbeelding
+ 
   const imageFile = result === "heads" ? "head.png" : "tail.png";
   coinImg.src = `images/${imageFile}`;
   coinImg.alt = result;
 
   if (selectedChoice === result) {
-    balance += bet * 4;
+    balance += bet * 3;
     alert(`✅ Je hebt gewonnen! Het was ${result}.`);
   } else {
     alert(`❌ Je hebt verloren. Het was ${result}.`);
