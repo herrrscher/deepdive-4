@@ -8,8 +8,15 @@ body {
 }
 
 .container {
+  display: flex;
+  flex-direction: row;         /* Zet de richting horizontaal */
+  justify-content: space-between; /* Verspreid de inhoud over de hele breedte */
+  align-items: center;         /* Centreert verticaal binnen de container */
+  width: 100vw;                /* Hele breedte van het scherm */
   padding: 20px;
+  box-sizing: border-box;      /* Houdt padding binnen de breedte */
 }
+
 
 .card {
   height: 100px;

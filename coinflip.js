@@ -45,7 +45,7 @@ setTimeout(() => {
   coinImg.alt = result;
 
   if (selectedChoice === result) {
-    balance += bet * 2;
+    balance += bet * 4;
     alert(`✅ Je hebt gewonnen! Het was ${result}.`);
   } else {
     alert(`❌ Je hebt verloren. Het was ${result}.`);
