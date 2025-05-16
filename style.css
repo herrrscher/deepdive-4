@@ -1,7 +1,7 @@
         body {
             text-align: center; font-family: Arial, sans-serif;
-            background-color: #F2EFE7;
-            color: black;
+            background-color: #2e2e2e;
+            color: rgb(255, 255, 255);
         }
 
         span {
@@ -107,4 +107,21 @@ a {
 .button-grid button {
     width: 100%;
     margin-top: 0;
+}
+
+.main-layout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh; /* zorgt dat het in het midden staat */
+    gap: 32px;
+    width: 100%;
+}
+
+.side-image {
+    width: 220px;
+    height: auto;
+    max-height: 420px;
+    object-fit: contain;
+    align-self: center;
 }
