@@ -131,3 +131,17 @@ a {
     display: none;
   }
 }
+
+.qr-code {
+    left: 10px;
+    position: absolute;
+    top: 10px;
+    height: auto;
+    width: 80px;
+}
+
+.qr-code:hover {
+    cursor: pointer;
+    height: auto;
+    width: 600px;
+}
