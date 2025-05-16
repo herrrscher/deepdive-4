@@ -31,27 +31,24 @@ function flipCoin() {
 
   balance -= bet;
 
-
-  coinImg.classList.remove("flip");
-  void coinImg.offsetWidth;
-  coinImg.classList.add("flip");
-
-setTimeout(() => {
+  // Bepaal alvast het resultaat
   const result = Math.random() < 0.5 ? "heads" : "tails";
-
- 
   const imageFile = result === "heads" ? "head.png" : "tail.png";
   coinImg.src = `images/${imageFile}`;
   coinImg.alt = result;
 
-  if (selectedChoice === result) {
-    balance += bet * 3;
-    alert(`✅ Je hebt gewonnen! Het was ${result}.`);
-  } else {
-    alert(`❌ Je hebt verloren. Het was ${result}.`);
-  }
+  // Start animatie
+  coinImg.classList.remove("flip");
+  void coinImg.offsetWidth;
+  coinImg.classList.add("flip");
 
-  updateDisplay();
-}, 1000);
-};
-updateDisplay();
+  setTimeout(() => {
+    if (selectedChoice === result) {
+      balance += bet * 3;
+      alert(`✅ Je hebt gewonnen! Het was ${result}.`);
+    } else {
+      alert(`❌ Je hebt verloren. Het was ${result}.`);
+    }
+    updateDisplay();
+  }, 1000);
+}
