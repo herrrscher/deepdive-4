@@ -109,20 +109,19 @@ a {
     margin-top: 0;
 }
 
+.main-layout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh; /* zorgt dat het in het midden staat */
+    gap: 32px;
+    width: 100%;
+}
+
 .side-image {
-    position: fixed;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 350px;
+    width: 220px;
     height: auto;
-    z-index: 5;
+    max-height: 420px;
+    object-fit: contain;
+    align-self: center;
 }
-
-.left {
-    left: 30px;
-}
-
-.right {
-    right: 30px;
-}
-
