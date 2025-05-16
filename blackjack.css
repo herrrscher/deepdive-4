@@ -1,0 +1,31 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #2e2e2e;
+  color: #fff;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  padding: 20px;
+}
+
+.card {
+  height: 100px;
+  margin: 5px;
+}
+
+button {
+  padding: 10px 20px;
+  margin: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+input[type="number"] {
+  padding: 5px;
+  margin: 10px;
+  font-size: 16px;
+  width: 80px;
+}
